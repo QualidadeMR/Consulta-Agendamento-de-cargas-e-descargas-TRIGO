@@ -1,0 +1,55 @@
+MOINHO REGIO — PAINEL DE QUALIDADE COM API COMPARTILHADA
+========================================================
+
+O QUE ESTA VERSÃO FAZ
+- Login obrigatório para abrir o painel e acessar a API.
+- A senha é configurada nas variáveis privadas do serviço; não fica no HTML.
+- A importação de Excel salva a base compartilhada no banco SQLite do servidor.
+- O painel consulta a API a cada 30 segundos e atualiza gráficos/tabelas se os dados mudarem.
+- Banco de dados e sessões ficam no disco persistente do serviço.
+
+IMPORTANTE SOBRE O ACESSO
+Esta configuração usa um login compartilhado (um usuário e senha para a equipe inteira). Compartilhe a senha apenas com funcionários autorizados e troque-a se alguém sair da empresa. Se precisar de contas individuais, registro de acesso por pessoa ou integração com Microsoft/Google, será necessário adaptar a autenticação.
+
+PUBLICAÇÃO RECOMENDADA: RENDER
+1. Extraia este ZIP em uma pasta.
+2. Crie um repositório PRIVADO no GitHub da empresa e envie os arquivos desta pasta para a raiz do repositório.
+   Inclua: index.html, server.js, package.json e render.yaml.
+3. Crie uma conta em https://render.com e conecte o GitHub.
+4. No Render, escolha New + > Blueprint e selecione o repositório privado.
+5. O Render lerá render.yaml. Antes de criar o serviço, informe os valores secretos:
+   - PANEL_USERNAME: um nome de usuário que a equipe usará.
+   - PANEL_PASSWORD: uma senha forte e exclusiva, de preferência longa.
+   - SESSION_SECRET é gerado automaticamente pelo arquivo render.yaml.
+6. Confirme a criação do serviço. O arquivo render.yaml solicita plano Starter com disco persistente para que a base não seja perdida quando o serviço reiniciar. Confira o preço atual do plano antes de confirmar.
+7. Quando o deploy terminar, abra a URL *.onrender.com do serviço. A página de login deverá aparecer.
+8. Entre com o usuário e a senha configurados e teste a importação de uma planilha.
+9. Abra o mesmo link em outro computador, entre e confirme que os dados importados aparecem. Com o painel aberto, a atualização deve ocorrer em até aproximadamente 30 segundos.
+
+COMO USAR DEPOIS
+- Todos os funcionários acessam o mesmo link e entram com as credenciais.
+- Um funcionário autorizado importa a planilha pelo botão “Atualizar planilha”.
+- A importação substitui a base compartilhada atual pela planilha importada; faça backup do Excel original antes de importar.
+- Os outros painéis abertos consultam a API a cada 30 segundos.
+- Para alterar a senha, atualize PANEL_PASSWORD nas variáveis de ambiente do serviço e reinicie/reimplante.
+
+ARQUIVOS
+- index.html: painel, com envio autenticado e atualização automática.
+- server.js: API, login, sessão e banco de dados.
+- package.json: dependências e comando de inicialização.
+- render.yaml: modelo de configuração do serviço Render.
+
+SEGURANÇA E LIMITAÇÕES
+- Mantenha o repositório GitHub privado: o HTML contém dados de exemplo embutidos no código.
+- O login protege a aplicação servida pelo Render, mas o arquivo index.html incluído neste pacote tem registros embutidos. Não publique esse HTML separadamente em um host público de arquivos estáticos.
+- Esta versão implementa um único usuário/senha compartilhado, não contas individuais.
+- O banco SQLite exige o disco persistente indicado em render.yaml. Não remova esse disco sem fazer backup.
+- Guarde uma cópia das planilhas originais; cada importação substitui a base compartilhada completa.
+
+TESTE LOCAL (OPCIONAL)
+Requer Node.js 20 ou superior.
+1. No terminal, dentro da pasta, rode: npm install
+2. Configure variáveis de ambiente PANEL_USERNAME, PANEL_PASSWORD e SESSION_SECRET.
+3. Defina DB_PATH para um caminho gravável, por exemplo ./data/moinho-regio.sqlite.
+4. Rode: npm start
+5. Abra http://localhost:3000

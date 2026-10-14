@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: moinho-regio-painel-qualidade
+    runtime: node
+    plan: starter
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    disk:
+      name: moinho-regio-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DB_PATH
+        value: /var/data/moinho-regio.sqlite
+      - key: PANEL_USERNAME
+        sync: false
+      - key: PANEL_PASSWORD
+        sync: false
+      - key: SESSION_SECRET
+        generateValue: true

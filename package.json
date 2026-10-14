@@ -1,0 +1,15 @@
+{
+  "name": "moinho-regio-painel-qualidade",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Painel de Qualidade Moinho Regio com API compartilhada e login restrito",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=20" },
+  "dependencies": {
+    "better-sqlite3": "^11.8.1",
+    "connect-sqlite3": "^0.9.16",
+    "express": "^4.21.2",
+    "express-session": "^1.18.1"
+  }
+}
