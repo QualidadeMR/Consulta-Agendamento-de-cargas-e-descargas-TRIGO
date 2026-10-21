@@ -16,6 +16,119 @@
 
 .datefilters{display:grid;grid-template-columns:1fr 1fr auto;gap:12px;align-items:end}.datefilters input{width:100%;min-height:38px}.qualitycharts{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:12px 0}.trendchart{width:100%;min-height:205px;position:relative}.trend-tooltip{display:none;position:absolute;z-index:5;pointer-events:none;background:#6b370c;color:#fff;border-radius:8px;padding:8px 10px;font-size:11px;line-height:1.5;box-shadow:0 6px 18px #0002;white-space:nowrap;transform:translate(-50%,-110%)}.trend-tooltip strong{font-size:12px}.trendchart svg{width:100%;height:190px;display:block;overflow:visible}.trendchart .axislabel{font-size:10px;fill:#896b4d}.trendchart .pointlabel{font-size:10px;fill:#75400c;font-weight:750}.trendchart .gridline{stroke:#ead8b8;stroke-width:1}.trendchart .trendline{fill:none;stroke:#9a5a0a;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}.trendchart .trenddot{fill:#9a5a0a;stroke:white;stroke-width:2;vector-effect:non-scaling-stroke}.trendchart .chartfoot{font-size:10px;color:#8c755e;margin-top:4px}.trendchart .no-data{min-height:180px;display:grid;place-items:center}
 @media(max-width:760px){.datefilters,.qualitycharts{grid-template-columns:1fr}.datefilters .btn{width:100%;justify-content:center}}
+
+/* ===== Aba Qualidade da farinha ===== */
+.kpis4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.kpis4 .kicon{font-size:11px}
+@media(max-width:900px){.kpis4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.qsub{margin:26px 0 3px;font-size:16px;letter-spacing:-.25px}
+.qsubnote{margin:0 0 10px;color:var(--muted);font-size:12px;line-height:1.5;max-width:760px}
+.qhead{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.qgrid{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:10px 0}
+@media(max-width:760px){.qgrid{grid-template-columns:1fr}}
+.segbar{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff;margin:26px 0 10px}
+.segbar button{border:0;background:transparent;padding:9px 14px;font-size:12px;font-weight:760;color:#876849}
+.segbar button.active{background:var(--forest);color:#fff}
+.qsvg{width:100%;height:auto;display:block;overflow:visible}
+.qsvg .qgridline{stroke:#d9c39b;stroke-width:1.2}
+.qsvg .qtick{stroke:#a98a5c;stroke-width:1.2}
+.qsvg .qaxis{stroke:#a98a5c;stroke-width:1.5}
+.qsvg .qpt{fill:#d4a51b;opacity:.42}
+.qsvg .qptout{fill:#fffaf1;stroke:#b3541e;stroke-width:1.5}
+.qsvg .qavg{fill:none;stroke:#7a3f08;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.qsvg .qdot{fill:#7a3f08;stroke:#fff;stroke-width:1.5}
+.qsvg .qref{stroke:#7a3f08;stroke-width:1.4;stroke-dasharray:6 4}
+.qsvg .qbar{fill:#c58a12}
+.qsvg .qbar:hover{fill:#7a3f08}
+.qsvg .qlabel{font-size:11px;fill:#5a3a1a;paint-order:stroke;stroke:#fff;stroke-width:3px;stroke-linejoin:round}
+.qsvg .qsmall{font-size:10.5px;fill:#7b5f42}
+.qsvg .qvalue{font-size:11px;font-weight:800;fill:#542d0d;paint-order:stroke;stroke:#fff;stroke-width:3px;stroke-linejoin:round}
+
+/* ===== Dicas ao passar o mouse e blocos da aba de qualidade ===== */
+.qchart{position:relative}
+.qtip{display:none;position:absolute;z-index:6;transform:translate(-50%,-100%);background:#3b2108;color:#fff7e6;border-radius:9px;padding:8px 11px;font-size:12px;line-height:1.5;pointer-events:none;box-shadow:0 8px 22px #3b210845;width:max-content;max-width:250px}
+.qtip strong{color:#ffd779}
+.qsvg .qhi{fill:none;stroke:#3b2108;stroke-width:2;pointer-events:none}
+.qsvg [data-tip]{cursor:pointer}
+.qsvg .qrowhit{fill:rgba(0,0,0,0)}
+.qblock{margin:0 0 34px}
+.qblocktitle{margin:26px 0 2px;font-size:20px;letter-spacing:-.4px;padding-top:18px;border-top:2px solid var(--line)}
+.qblock:first-of-type .qblocktitle{border-top:0;padding-top:0;margin-top:14px}
+.qtoolbar{display:flex;align-items:center;justify-content:space-between;gap:12px 22px;flex-wrap:wrap;margin:6px 0 4px}
+.qtoolbar .segbar{margin:0}
+.qperiod,.qjump{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.qperiod strong{color:var(--ink)}
+h4.qsub{margin:22px 0 3px;font-size:15px;letter-spacing:-.2px}
+.qslot{position:relative}
+.qstepbar{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);flex-wrap:wrap}
+.qtoolbar .qstepbar .segbar{margin:0}
+.qsvg .qdense{stroke-width:.8}
+
+/* Organização lado a lado: farinha e trigo, com gráficos equivalentes alinhados */
+#panel-quality{grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:18px;align-items:start}
+/* A aba de qualidade só deve aparecer quando estiver selecionada. */
+.panel.active#panel-quality{display:grid}
+#panel-quality>.section-head,#panel-quality>.qtoolbar{grid-column:1/-1}
+#panel-quality>.qblock{min-width:0;margin-top:8px;padding:16px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.42)}
+#panel-quality #qBlockqf{grid-column:1}
+#panel-quality #qBlockqw{grid-column:2}
+#panel-quality .qgrid{grid-template-columns:minmax(0,1fr);gap:12px}
+#panel-quality .qblocktitle{min-height:2.5em}
+@media(max-width:1000px){
+ .panel.active#panel-quality{display:block}
+ #panel-quality>.qblock{margin-top:16px}
+ #panel-quality .qgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:650px){#panel-quality .qgrid{grid-template-columns:1fr}}
+
+
+/* Barra de filtro por datas da qualidade: visual compacto semelhante à Base de dados */
+#panel-quality>.qtoolbar{
+  background:var(--card, #fff);
+  border:1px solid var(--line, #ead8bd);
+  border-radius:14px;
+  padding:16px 18px;
+  margin:0 0 8px;
+  position:sticky;
+  top:8px;
+  z-index:20;
+  box-shadow:0 5px 18px rgba(80,45,12,.06);
+}
+#panel-quality .qperiod{flex:1 1 250px}
+#panel-quality .qjump{flex:0 1 auto}
+#panel-quality .qstepbar{flex:1 1 330px}
+#panel-quality>.qblock{scroll-margin-top:160px}
+#panel-quality .qjump button:focus-visible,
+#panel-quality .qtoolbar button:focus-visible{outline:3px solid rgba(176,105,24,.35);outline-offset:2px}
+@media(max-width:900px){
+ #panel-quality>.qtoolbar{position:relative;top:auto}
+ #panel-quality .qstepbar{flex-basis:100%}
+}
+
+
+/* Filtro de datas sempre acessível e interface com menos textos auxiliares */
+.qtoolbar{display:flex;flex-direction:column;align-items:stretch;gap:12px}
+.qdate-row{display:grid;grid-template-columns:minmax(150px,1fr) minmax(150px,1fr) auto auto;align-items:end;gap:12px;width:100%;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.qdate-row .filter{min-width:0}
+.qdate-row label{display:block;margin:0 0 6px;font-size:10px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.qdate-row input{min-height:40px;width:100%;min-width:0}
+.qtoolbar-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;width:100%}
+.qtoolbar-actions .qjump{display:flex;gap:8px}
+.qtoolbar-actions .qstepbar{display:flex;gap:8px}
+.qtoolbar-actions .segbar{margin:0}
+.qtoolbar-actions .btn,.qdate-row .btn{min-height:38px}
+/* Os títulos e os controles permanecem; escondemos descrições repetitivas e notas longas. */
+.section-head>div>p,.cardhead>div>p,#panel-quality .qsubnote,#panel-quality .chartfoot{display:none!important}
+#panel-quality .qblocktitle{min-height:0;padding-top:12px;margin-top:14px}
+@media(max-width:760px){
+ .qdate-row{grid-template-columns:1fr 1fr;}
+ .qdate-row .btn{width:100%}
+ .qtoolbar-actions{align-items:flex-start;justify-content:flex-start}
+ .qtoolbar-actions .qstepbar{flex-basis:100%}
+ .qtoolbar-actions .segbar{flex-wrap:wrap}
+}
+@media(max-width:430px){.qdate-row{grid-template-columns:1fr}.qdate-row .tinybadge{justify-self:start}}
+
 </style>
 </head>
 <body>
@@ -42,6 +155,7 @@
     <button class="tab" data-tab="suppliers">Por fornecedor</button>
     <button class="tab" data-tab="storage">Por armazenamento</button>
     <button class="tab" data-tab="flour">Trigo × farinha</button>
+    <button class="tab" data-tab="quality">Qualidade da farinha</button>
     <button class="tab" data-tab="lungs">Pulmões</button>
     <button class="tab" data-tab="records">Base de dados</button>
   </nav>
@@ -77,6 +191,33 @@
       <article class="card" style="margin-top:15px"><div class="cardhead"><div><h3>Outros resultados de farinha</h3><p>Médias dos parâmetros reológicos e de contaminantes da seleção atual.</p></div></div><div class="metric-table-wrap" id="flourExtraTable"></div></article>
     </section>
 
+    <section class="panel" id="panel-quality">
+      <div class="section-head"><div><h2>Qualidade da farinha e do trigo</h2></div><span class="tinybadge" id="qualityCount">—</span></div>
+      <div class="qtoolbar">
+        <div class="qdate-row">
+          <div class="filter"><label for="dateFrom">Data inicial</label><input class="searchbox" id="dateFrom" type="date" aria-label="Data inicial do filtro"></div>
+          <div class="filter"><label for="dateTo">Data final</label><input class="searchbox" id="dateTo" type="date" aria-label="Data final do filtro"></div>
+          <button class="btn subtle" id="clearDateRange" type="button">Limpar datas</button>
+          <span class="tinybadge" id="dateRangeCount">Período completo</span><span id="qualityPeriod" hidden>Período completo</span>
+        </div>
+      </div>
+      <div class="qblock" id="qBlockqf">
+        <h3 class="qblocktitle">Farinha: W, P/L, estabilidade e glúten úmido</h3>
+        <div class="kpis kpis4" id="qfKpis"></div>
+        <div class="qgrid" id="qfTrend"></div>
+        <div class="qgrid" id="qfHist"></div>
+        <div class="qgrid" id="qfGroup"></div>
+        <article class="card"><div class="cardhead"><div><h3>Força (W) e relação P/L por amostra</h3><p>As linhas tracejadas marcam as médias das amostras que têm os dois resultados.</p></div><span class="tinybadge">W × P/L</span></div><div class="qslot" id="qfScatter"></div></article>
+      </div>
+      <div class="qblock" id="qBlockqw">
+        <h3 class="qblocktitle">Trigo recebido: PH, Falling Number, cor L* e umidade</h3>
+        <div class="kpis kpis4" id="qwKpis"></div>
+        <div class="qgrid" id="qwTrend"></div>
+        <div class="qgrid" id="qwHist"></div>
+        <div class="qgrid" id="qwGroup"></div>
+      </div>
+    </section>
+
     <section class="panel" id="panel-lungs">
       <div class="section-head"><div><div class="eyebrow">Análise por pulmão</div><h2>Resultados dos pulmões</h2><p>Exibe cada pulmão encontrado na coluna de armazenamento e confronta os indicadores com os demais locais de armazenamento.</p></div><span class="tinybadge" id="lungCount">—</span></div>
       <div class="kpis" id="lungKpis"></div>
@@ -86,17 +227,6 @@
 
     <section class="panel" id="panel-records">
       <div class="section-head"><div><div class="eyebrow">Consulta detalhada</div><h2>Base de dados</h2><p>Pesquise registros e abra os detalhes para consultar os campos originais da planilha.</p></div><span class="tinybadge" id="recordsCount">—</span></div>
-      <article class="card">
-        <div class="cardhead"><div><h3>Filtrar por período</h3><p>Escolha as datas para limitar os registros e atualizar os gráficos abaixo.</p></div><span class="tinybadge" id="dateRangeCount">Período completo</span></div>
-        <div class="datefilters"><div class="filter"><label for="dateFrom">Data inicial</label><input class="searchbox" id="dateFrom" type="date"></div><div class="filter"><label for="dateTo">Data final</label><input class="searchbox" id="dateTo" type="date"></div><button class="btn subtle" id="clearDateRange" type="button">Limpar período ↺</button></div>
-      </article>
-      <div class="section-head" style="margin-top:18px"><div><div class="eyebrow">Tendência dos resultados</div><h2>Gráficos de qualidade</h2><p>Resultados individuais dentro do período selecionado. Os gráficos respeitam também os filtros de fornecedor e armazenamento.</p></div></div>
-      <div class="qualitycharts">
-        <article class="card"><div class="cardhead"><div><h3>PH</h3><p>Média por período</p></div><span class="tinybadge">PH</span></div><div class="trendchart" id="trendPh"></div></article>
-        <article class="card"><div class="cardhead"><div><h3>Falling Number</h3><p>Média por período</p></div><span class="tinybadge">s</span></div><div class="trendchart" id="trendFn"></div></article>
-        <article class="card"><div class="cardhead"><div><h3>Cor do trigo (L*)</h3><p>Média por período</p></div><span class="tinybadge">L*</span></div><div class="trendchart" id="trendColor"></div></article>
-        <article class="card"><div class="cardhead"><div><h3>Umidade do trigo</h3><p>Média por período</p></div><span class="tinybadge">%</span></div><div class="trendchart" id="trendMoisture"></div></article>
-      </div>
       <article class="card" style="margin-top:15px"><div class="searchline"><input class="searchbox" id="recordSearch" placeholder="Buscar fornecedor, placa, nota fiscal, amostra, resultado..." type="search"><button class="btn" id="exportRecordsCsv">Exportar registros ↓</button><span class="resultcount" id="recordsResultCount"></span></div><div class="data-table-wrap" id="recordsTable"></div><div class="pagination"><span id="pageLabel">Página 1</span><button class="btn" id="prevPage">← Anterior</button><button class="btn" id="nextPage">Próxima →</button></div></article>
     </section>
   </main>
@@ -158,7 +288,7 @@ function renderKpis(rs,target='kpis'){
 function renderMonthly(rs){const months=new Map();rs.forEach(r=>{const s=clean(r[F.date]);const m=s.match(/^(\d{4})-(\d{2})-/);if(!m)return;const val=num(r[F.moisture]);if(val===null)return;const k=m[1]+'-'+m[2];if(!months.has(k))months.set(k,[]);months.get(k).push(val);});const a=[...months.entries()].sort((x,y)=>x[0].localeCompare(y[0])).slice(-12);if(!a.length){$('monthlyChart').innerHTML='<div class="no-data" style="width:100%">Sem datas e valores de umidade para desenhar o gráfico.</div>';return;}const max=Math.max(...a.map(([k,v])=>v.reduce((s,x)=>s+x,0)/v.length),1);$('monthlyChart').innerHTML=a.map(([k,v])=>{const avg=v.reduce((s,x)=>s+x,0)/v.length;const h=Math.max(4,avg/max*142);const [y,m]=k.split('-');return `<div class="chartcol" title="${esc(k)} · ${fmt(avg)}% · ${v.length} resultados"><div class="chartnum">${fmt(avg,1)}</div><div class="chartbar" style="height:${h}px"></div><div class="chartlabel">${m}/${y.slice(2)}</div></div>`;}).join('');$('chartLegend').textContent=`Média aritmética · ${fmtCount(a.reduce((s,x)=>s+x[1].length,0))} resultados com data. Valores em %.`;
 }
 function renderTopSuppliers(rs){const groups=groupRows(rs,F.supplier).slice(0,8);if(!groups.length){$('topSuppliers').innerHTML='<div class="no-data">Sem fornecedores preenchidos.</div>';return;}const max=groups[0].rows.length;$('topSuppliers').innerHTML=groups.map(g=>`<div class="minirow"><div><div class="minilabel" title="${esc(g.label)}">${esc(g.label)}</div><div class="minimeta">Umidade ${fmt(averageAt(g.rows,F.moisture).value)}% · FN ${fmt(averageAt(g.rows,F.fn).value,0)}</div><div class="minibarwrap"><div class="minibar" style="width:${g.rows.length/max*100}%"></div></div></div><div class="minivalue">${fmtCount(g.rows.length)}</div></div>`).join('');}
-function renderQuickQuality(rs){const defs=[['Umidade trigo (%)',F.moisture,2],['Falling Number trigo',F.fn,1],['PH',F.ph,1],['Grãos avariados (%)',F.damaged,2],['Impurezas (%)',F.impurity,2],['Umidade farinha (%)',F.flourMoisture,2],['Falling Number farinha',F.flourFn,1],['W — farinha',F.w,1],['P/L — farinha',F.pl,2]];const body=defs.map(([label,i,d])=>{const a=averageAt(rs,i);return tr([esc(label),fmt(a.value,d),fmtCount(a.n)]);});setTable('quickQuality',['Parâmetro','Média','Nº de resultados'],body);}
+function renderQuickQuality(rs){const defs=[['Umidade trigo (%)',F.moisture,2],['Falling Number trigo',F.fn,1],['PH',F.ph,1],['Grãos avariados (%)',F.damaged,2],['Impurezas (%)',F.impurity,2],['Umidade farinha (%)',F.flourMoisture,2],['Falling Number farinha',F.flourFn,1],['W — farinha',F.w,1],['P/L — farinha',F.pl,2],['Estabilidade — farinha (min)',F.stability,1],['Glúten úmido — farinha (%)',F.glutenWet,1]];const body=defs.map(([label,i,d])=>{const a=averageAt(rs,i);return tr([esc(label),fmt(a.value,d),fmtCount(a.n)]);});setTable('quickQuality',['Parâmetro','Média','Nº de resultados'],body);}
 function renderGroupedTable(rs,field,target,countTarget){const gs=groupRows(rs,field);$(countTarget).textContent=`${fmtCount(gs.length)} grupos`;const body=gs.map(g=>metricGroupRow(g.label,g.rows));setTable(target,['Grupo','Registros','Umidade trigo (%)','N umidade','FN trigo','N FN','PH','Umidade farinha (%)','N umid. farinha','FN farinha','N FN farinha','W farinha','P/L'],body);}
 function renderPaired(rs){const defs=[['Umidade (%)',F.moisture,F.flourMoisture,2],['Falling Number',F.fn,F.flourFn,1],['Cor L*',F.color,F.flourColor,2]];const vals=defs.map(([label,a,b,digits])=>{const p=paired(rs,a,b);return {label,digits,avgWheat:p.a,avgFlour:p.b,delta:p.d,n:p.n};});$('flourSamples').textContent=`${fmtCount(vals.reduce((m,x)=>Math.max(m,x.n),0))} pares máx.`;
  $('pairedCards').innerHTML=vals.map(x=>`<div class="comp-card"><div class="label">${esc(x.label)}</div><div class="vals"><div><div class="smallmuted">Trigo</div><div class="big">${fmt(x.avgWheat,x.digits)}</div></div><div class="arrow">→</div><div><div class="smallmuted">Farinha</div><div class="big">${fmt(x.avgFlour,x.digits)}</div></div></div><div class="delta">Diferença farinha − trigo: ${fmt(x.delta,x.digits)}</div><div class="pairn">${fmtCount(x.n)} linhas com ambos os resultados</div></div>`).join('');
@@ -177,10 +307,9 @@ function renderRecords(rs){const q=$('recordSearch').value||'';const indexByRow=
  const heads=['Data','Fornecedor','Placa','Armazenamento','Classificação','Umidade trigo','FN trigo','Umidade farinha','FN farinha','W','P/L','Ações'];let body=show.map(({r,idx})=>`<tr><td>${esc(dateLabel(r[F.date]))}</td><td>${esc(clean(r[F.supplier])||'—')}</td><td>${esc(clean(r[F.plate])||'—')}</td><td>${clean(r[F.storage])?`<span class="pill ${hasPulmao(r)?'storage-pulmao':'neutral'}">${esc(r[F.storage])}</span>`:'—'}</td><td>${esc(clean(r[F.classResult])||'—')}</td><td>${esc(fmt(num(r[F.moisture])))}</td><td>${esc(fmt(num(r[F.fn]),1))}</td><td>${esc(fmt(num(r[F.flourMoisture])))}</td><td>${esc(fmt(num(r[F.flourFn]),1))}</td><td>${esc(fmt(num(r[F.w]),1))}</td><td>${esc(fmt(num(r[F.pl]),2))}</td><td><button class="detailbtn" data-detail="${idx}">Ver detalhes</button></td></tr>`).join('');
  $('recordsTable').innerHTML=body?`<table class="data-table"><thead><tr>${heads.map(h=>`<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${body}</tbody></table>`:'<div class="no-data"><strong>Nenhum registro encontrado</strong>Revise a pesquisa ou os filtros.</div>';
 }
-function renderQualityTrend(rs,target,field,digits=1){const data=rs.map((r,idx)=>({k:isoDate(r[F.date]),v:num(r[field]),n:1,idx})).filter(d=>d.k&&d.v!==null).sort((a,b)=>a.k.localeCompare(b.k)||a.idx-b.idx);const el=$(target);if(!data.length){el.innerHTML='<div class="no-data">Sem resultados com data válida neste período.</div>';return;}const W=Math.max(440,Math.min(1100,data.length*5)),H=180,L=44,R=14,T=18,B=34,iw=W-L-R,ih=H-T-B;let min=Math.min(...data.map(x=>x.v)),max=Math.max(...data.map(x=>x.v));if(min===max){const pad=Math.max(Math.abs(min)*.01,.5);min-=pad;max+=pad;}const x=i=>L+(data.length===1?iw/2:i*iw/(data.length-1)),y=v=>T+(max-v)/(max-min)*ih;const metric=({trendPh:'PH',trendFn:'Falling Number',trendColor:'Cor L*',trendMoisture:'Umidade'})[target]||'Resultado';let svg=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Resultados individuais de ${metric}"><title>Resultados individuais de ${metric}</title>`;for(let i=0;i<4;i++){const yy=T+i*ih/3,val=max-i*(max-min)/3;svg+=`<line class="gridline" x1="${L}" y1="${yy}" x2="${W-R}" y2="${yy}"/><text class="axislabel" x="${L-7}" y="${yy+3}" text-anchor="end">${fmt(val,digits)}</text>`;}svg+=`<polyline class="trendline" points="${data.map((d,i)=>`${x(i)},${y(d.v)}`).join(' ')}" style="pointer-events:stroke;stroke-width:12;stroke:transparent"/><polyline class="trendline" points="${data.map((d,i)=>`${x(i)},${y(d.v)}`).join(' ')}"/>`;const labelStep=Math.max(1,Math.ceil(data.length/8));data.forEach((d,i)=>{svg+=`<circle class="trenddot" data-index="${i}" cx="${x(i)}" cy="${y(d.v)}" r="${data.length>100?2.8:4.2}"><title>${d.k}: ${fmt(d.v,digits)}</title></circle>`;if(i===0||i===data.length-1||i%labelStep===0){const dt=d.k.slice(8,10)+'/'+d.k.slice(5,7);svg+=`<text class="axislabel" x="${x(i)}" y="${H-12}" text-anchor="middle">${dt}</text>`;}});svg+='</svg>';svg+=`<div class="trend-tooltip" aria-live="polite"></div><div class="chartfoot">${fmtCount(data.length)} resultados individuais plotados. Passe o mouse sobre qualquer ponto para ver o valor e a data.</div>`;el.innerHTML=svg;const graph=el.querySelector('svg'),tip=el.querySelector('.trend-tooltip');function showPoint(evt){const rect=graph.getBoundingClientRect();const vbX=(evt.clientX-rect.left)/rect.width*W;let nearest=0;data.forEach((d,i)=>{if(Math.abs(x(i)-vbX)<Math.abs(x(nearest)-vbX))nearest=i;});const d=data[nearest];tip.innerHTML=`<strong>${metric}: ${fmt(d.v,digits)}</strong><br>${d.k.slice(8,10)}/${d.k.slice(5,7)}/${d.k.slice(0,4)} · resultado individual`;tip.style.display='block';const left=Math.max(65,Math.min(el.clientWidth-65,(x(nearest)/W)*rect.width+rect.left-el.getBoundingClientRect().left));tip.style.left=left+'px';tip.style.top=Math.max(28,(y(d.v)/H)*rect.height+rect.top-el.getBoundingClientRect().top)+'px';el.querySelectorAll('.trenddot').forEach((dot,i)=>dot.setAttribute('r',i===nearest?'6':(data.length>100?'2.8':'4.2')));}graph.addEventListener('mousemove',showPoint);graph.addEventListener('mouseenter',showPoint);graph.addEventListener('mouseleave',()=>{tip.style.display='none';el.querySelectorAll('.trenddot').forEach(dot=>dot.setAttribute('r',data.length>100?'2.8':'4.2'));});}
-function renderQualityCharts(rs){renderQualityTrend(rs,'trendPh',F.ph,1);renderQualityTrend(rs,'trendFn',F.fn,1);renderQualityTrend(rs,'trendColor',F.color,2);renderQualityTrend(rs,'trendMoisture',F.moisture,2);const from=$('dateFrom').value,to=$('dateTo').value;$('dateRangeCount').textContent=(from||to)?`${from?dateLabel(from):'Início'} até ${to?dateLabel(to):'Hoje'}`:'Período completo';}
-function renderAll(){const rs=getFiltered();$('activeScope').textContent=getScopeText();renderQualityCharts(rs);renderKpis(rs);renderMonthly(rs);renderTopSuppliers(rs);renderQuickQuality(rs);renderGroupedTable(rs,F.supplier,'supplierTable','supplierCount');renderGroupedTable(rs,F.storage,'storageTable','storageCount');renderPaired(rs);renderLungs(rs);renderRecords(rs);const last=serverUpdatedAt?new Date(serverUpdatedAt):null; $('dataStatus').textContent=last?`Sincronizado ${last.toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'})}`:(localUpdatedAt?`Atualizada ${localUpdatedAt}`:`Base inicial · ${fmtCount(rows.length)} registros`);$('footerSource').textContent=`${sourceLabel} · ${fmtCount(rows.length)} registros${serverMode?' · dados compartilhados':''}`;}
-function setTab(tab){activeTab=tab;document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id===`panel-${tab}`));if(tab==='records')renderRecords(getFiltered());}
+function renderQualityCharts(rs){const from=$('dateFrom').value,to=$('dateTo').value;$('dateRangeCount').textContent=(from||to)?`${from?dateLabel(from):'Sem início'} — ${to?dateLabel(to):'Sem fim'}`:'Período completo';}
+function renderAll(){const rs=getFiltered();$('activeScope').textContent=getScopeText();renderQualityCharts(rs);renderKpis(rs);renderMonthly(rs);renderTopSuppliers(rs);renderQuickQuality(rs);renderGroupedTable(rs,F.supplier,'supplierTable','supplierCount');renderGroupedTable(rs,F.storage,'storageTable','storageCount');renderPaired(rs);renderLungs(rs);if(activeTab==='quality'){clearTimeout(qualityTimer);qualityTimer=setTimeout(()=>renderQuality(rs),150);}renderRecords(rs);const last=serverUpdatedAt?new Date(serverUpdatedAt):null; $('dataStatus').textContent=last?`Sincronizado ${last.toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'})}`:(localUpdatedAt?`Atualizada ${localUpdatedAt}`:`Base inicial · ${fmtCount(rows.length)} registros`);$('footerSource').textContent=`${sourceLabel} · ${fmtCount(rows.length)} registros${serverMode?' · dados compartilhados':''}`;}
+function setTab(tab){activeTab=tab;document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id===`panel-${tab}`));if(tab==='records')renderRecords(getFiltered());if(tab==='quality')renderQuality(getFiltered());}
 function notice(text,kind='ok'){const el=$('importNotice');el.textContent=text;el.classList.add('show');el.style.background=kind==='error'?'#fae7e4':'#f7ebcf';el.style.color=kind==='error'?'#8a3328':'#75400c';}
 function hideNotice(){ $('importNotice').classList.remove('show'); }
 function excelDate(v){if(v instanceof Date && !isNaN(v))return v.toISOString().slice(0,10);if(typeof v==='number'&&v>30000&&v<60000){const d=new Date(Date.UTC(1899,11,30)+Math.floor(v)*86400000);return d.toISOString().slice(0,10);}if(typeof v==='string'){const s=v.trim();let m=s.match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{4})$/);if(m)return `${m[3]}-${m[2].padStart(2,'0')}-${m[1].padStart(2,'0')}`;}return v;}
@@ -298,10 +427,206 @@ async function importWorkbook(file){
 
 $('importBtn').addEventListener('click',()=>$('fileInput').click());$('fileInput').addEventListener('change',e=>{if(e.target.files&&e.target.files[0])importWorkbook(e.target.files[0]);e.target.value='';});
 ['yearFilter','supplierFilter','storageFilter'].forEach(id=>$(id).addEventListener('change',()=>{page=0;renderAll();}));$('supplierFilter').addEventListener('input',()=>{page=0;renderAll();});$('clearFilters').addEventListener('click',()=>{$('yearFilter').value='all';$('supplierFilter').value='';$('storageFilter').value='all';page=0;renderAll();});
-['dateFrom','dateTo'].forEach(id=>$(id).addEventListener('change',()=>{if($('dateFrom').value&&$('dateTo').value&&$('dateFrom').value>$('dateTo').value){notice('A data inicial precisa ser anterior ou igual à data final.','error');$(id).value='';return;}page=0;renderAll();}));$('clearDateRange').addEventListener('click',()=>{$('dateFrom').value='';$('dateTo').value='';page=0;renderAll();});
+function syncDateBounds(){const f=$('dateFrom').value,t=$('dateTo').value;$('dateFrom').max=t||'';$('dateTo').min=f||'';}['dateFrom','dateTo'].forEach(id=>$(id).addEventListener('change',()=>{if($('dateFrom').value&&$('dateTo').value&&$('dateFrom').value>$('dateTo').value){notice('A data inicial não pode ser posterior à data final.','error');if(id==='dateFrom')$('dateFrom').value=$('dateTo').value;else $('dateTo').value=$('dateFrom').value;}syncDateBounds();page=0;renderAll();}));$('clearDateRange').addEventListener('click',()=>{$('dateFrom').value='';$('dateTo').value='';syncDateBounds();page=0;renderAll();});syncDateBounds();
 document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>setTab(b.dataset.tab)));document.querySelectorAll('[data-jump]').forEach(b=>b.addEventListener('click',()=>setTab(b.dataset.jump)));
 $('recordSearch').addEventListener('input',()=>{page=0;renderRecords(getFiltered());});$('prevPage').addEventListener('click',()=>{page=Math.max(0,page-1);renderRecords(getFiltered());});$('nextPage').addEventListener('click',()=>{page++;renderRecords(getFiltered());});document.addEventListener('click',e=>{const b=e.target.closest('[data-detail]');if(b)openDetail(Number(b.dataset.detail));});$('closeModal').addEventListener('click',()=>$('detailModal').classList.remove('open'));$('detailModal').addEventListener('click',e=>{if(e.target===$('detailModal'))$('detailModal').classList.remove('open');});document.addEventListener('keydown',e=>{if(e.key==='Escape')$('detailModal').classList.remove('open');});
 $('exportRecordsCsv').addEventListener('click',()=>downloadCSV('registros_filtrados.csv',getFiltered()));$('exportSupplierCsv').addEventListener('click',()=>exportGroupTable('supplier'));$('exportStorageCsv').addEventListener('click',()=>exportGroupTable('storage'));$('exportLungCsv').addEventListener('click',()=>{const groups=groupRows(getFiltered().filter(hasPulmao),F.storage);const out=groups.map(g=>[g.label,g.rows.length,averageAt(g.rows,F.moisture).value,averageAt(g.rows,F.fn).value,averageAt(g.rows,F.flourMoisture).value,averageAt(g.rows,F.flourFn).value,averageAt(g.rows,F.w).value,averageAt(g.rows,F.pl).value]);downloadCSV('resultados_por_pulmao.csv',out,['Pulmão','Registros','Umidade trigo','FN trigo','Umidade farinha','FN farinha','W','P/L']);});
+
+/* ===== Qualidade: farinha (W, P/L, estabilidade, glúten úmido) e trigo (PH, Falling Number, cor L*, umidade) ===== */
+const QUALITY_FLOUR=[
+  {name:'Força (W)',badge:'W',icon:'W',field:F.w,digits:0},
+  {name:'Relação P/L',badge:'P/L',icon:'P/L',field:F.pl,digits:2},
+  {name:'Estabilidade',badge:'min',icon:'min',field:F.stability,digits:1},
+  {name:'Glúten úmido',badge:'%',icon:'%',field:F.glutenWet,digits:1}
+];
+const QUALITY_WHEAT=[
+  {name:'PH',badge:'PH',icon:'PH',field:F.ph,digits:1},
+  {name:'Falling Number',badge:'s',icon:'s',field:F.fn,digits:0},
+  {name:'Cor do trigo (L*)',badge:'L*',icon:'L*',field:F.color,digits:2},
+  {name:'Umidade do trigo',badge:'%',icon:'%',field:F.moisture,digits:2}
+];
+let qualityGroupBy='supplier',qualityTimer=null,qualityStep='week';
+const qEmpty=t=>({html:`<div class="no-data">${esc(t)}</div>`});
+const qRowInfo=r=>`${esc(clean(r[F.supplier])||'Fornecedor não informado')}<br>${esc(clean(r[F.storage])||'Armazenamento não informado')}`;
+function qVals(rs,field){const out=[];rs.forEach(r=>{const v=num(r[field]);if(v!==null)out.push(v);});return out;}
+function qStats(vals){const n=vals.length;if(!n)return null;const a=vals.slice().sort((x,y)=>x-y);const q=p=>{const i=(n-1)*p,lo=Math.floor(i),hi=Math.ceil(i);return a[lo]+(a[hi]-a[lo])*(i-lo);};let sum=0;for(const v of a)sum+=v;return {n,min:a[0],max:a[n-1],mean:sum/n,median:q(.5),p1:q(.01),p5:q(.05),p95:q(.95),p99:q(.99)};}
+function qRange(st){let lo=st.p1,hi=st.p99;if(!(hi>lo)){lo=st.min;hi=st.max;}if(!(hi>lo)){lo-=.5;hi+=.5;}const pad=(hi-lo)*.06;lo-=pad;hi+=pad;if(st.min>=0&&lo<0)lo=0;return [lo,hi];}
+function qTicks(lo,hi,target){const raw=(hi-lo)/target,mag=Math.pow(10,Math.floor(Math.log10(raw))),norm=raw/mag,step=(norm<1.5?1:norm<3?2:norm<7?5:10)*mag,t=[];for(let v=Math.ceil(lo/step-1e-9)*step;v<=hi+1e-9;v+=step)t.push(Number(v.toFixed(10)));return t;}
+function qDateMs(v){const k=isoDate(v);if(!k)return null;const p=k.split('-').map(Number);return Date.UTC(p[0],p[1]-1,p[2]);}
+function qMonthLabel(ms){const d=new Date(ms);return String(d.getUTCMonth()+1).padStart(2,'0')+'/'+String(d.getUTCFullYear()).slice(2);}
+function qDateFull(ms){const d=new Date(ms);return String(d.getUTCDate()).padStart(2,'0')+'/'+String(d.getUTCMonth()+1).padStart(2,'0')+'/'+d.getUTCFullYear();}
+const qCut=(s,n)=>s.length>n?s.slice(0,n-1)+'…':s;
+const qTipAttr=html=>` data-tip="${esc(html)}"`;
+
+/* Coloca o gráfico na tela e liga a dica: barras e médias mensais mostram a dica ao passar o mouse; nos demais pontos, aparece o resultado do ponto mais próximo. */
+function qMount(el,res){
+  el.classList.add('qchart');
+  el.innerHTML=res.html+'<div class="qtip"></div>';
+  const svg=el.querySelector('svg'),tip=el.querySelector('.qtip');
+  if(!svg)return;
+  const pts=res.pts||[];
+  let ring=null;
+  if(pts.length){ring=document.createElementNS('http://www.w3.org/2000/svg','circle');ring.setAttribute('class','qhi');ring.setAttribute('r','6.5');ring.style.display='none';svg.appendChild(ring);}
+  const hide=()=>{tip.style.display='none';if(ring)ring.style.display='none';};
+  const show=(html,ev)=>{tip.innerHTML=html;tip.style.display='block';const box=el.getBoundingClientRect(),w=tip.offsetWidth,h=tip.offsetHeight;let x=ev.clientX-box.left;x=Math.min(Math.max(x,w/2+4),Math.max(w/2+4,box.width-w/2-4));tip.style.left=x+'px';tip.style.top=Math.max(h+6,ev.clientY-box.top-14)+'px';};
+  const onMove=ev=>{
+    const t=ev.target.closest&&ev.target.closest('[data-tip]');
+    if(t){if(ring)ring.style.display='none';show(t.getAttribute('data-tip'),ev);return;}
+    if(!pts.length){hide();return;}
+    const r=svg.getBoundingClientRect(),k=svg.viewBox.baseVal.width/r.width,mx=(ev.clientX-r.left)*k,my=(ev.clientY-r.top)*k;
+    let best=null,bd=(18*k)*(18*k);
+    for(let i=0;i<pts.length;i++){const p=pts[i],dx=p.x-mx,dy=p.y-my,d=dx*dx+dy*dy;if(d<bd){bd=d;best=p;}}
+    if(!best){hide();return;}
+    ring.setAttribute('cx',best.x.toFixed(1));ring.setAttribute('cy',best.y.toFixed(1));ring.style.display='';
+    show(res.tipOf(best),ev);
+  };
+  svg.addEventListener('mousemove',onMove);
+  svg.addEventListener('click',onMove);
+  svg.addEventListener('mouseleave',hide);
+}
+
+const Q_STEPS={
+  result:{sub:'Cada ponto é um resultado',unit:'',r:2.6,dense:true},
+  day:{sub:'Cada ponto é a média de um dia',unit:'dias',r:3.2,dense:true},
+  week:{sub:'Cada ponto é a média de uma semana',unit:'semanas',r:4,dense:false},
+  month:{sub:'Cada ponto é a média de um mês',unit:'meses',r:4.6,dense:false}
+};
+function qNames(rows,idx,empty){const c=new Map();rows.forEach(r=>{const k=clean(r[idx])||empty;c.set(k,(c.get(k)||0)+1);});const a=[...c.entries()].sort((x,y)=>y[1]-x[1]),top=a.slice(0,3).map(e=>esc(e[0])).join(', ');return a.length>3?`${top} e mais ${a.length-3}`:top;}
+function qTrend(rs,m){
+  const DAY=864e5,step=qualityStep,cfg=Q_STEPS[step];
+  const raw=[];let semData=0;
+  rs.forEach(r=>{const v=num(r[m.field]);if(v===null)return;const t=qDateMs(r[F.date]);if(t===null){semData++;return;}raw.push({t,v,r});});
+  if(!raw.length)return qEmpty('Sem resultados com data para esta seleção.');
+  const all=qStats(raw.map(p=>p.v));
+  let t0=Infinity,t1=-Infinity;raw.forEach(p=>{if(p.t<t0)t0=p.t;if(p.t>t1)t1=p.t;});
+  let buckets;
+  if(step==='result'){
+    raw.sort((a,b)=>a.t-b.t);
+    buckets=raw.map(p=>({t:p.t,tmin:p.t,tmax:p.t,sum:p.v,n:1,min:p.v,max:p.v,rows:[p.r],val:p.v}));
+  }else{
+    const mp=new Map();
+    raw.forEach(p=>{let k;if(step==='day')k=p.t;else if(step==='week'){const d=new Date(p.t);k=p.t-((d.getUTCDay()+6)%7)*DAY;}else{const d=new Date(p.t);k=d.getUTCFullYear()*12+d.getUTCMonth();}
+      let b=mp.get(k);if(!b){b={key:k,tmin:p.t,tmax:p.t,sum:0,n:0,min:p.v,max:p.v,rows:[]};mp.set(k,b);}
+      b.sum+=p.v;b.n++;if(p.v<b.min)b.min=p.v;if(p.v>b.max)b.max=p.v;if(p.t<b.tmin)b.tmin=p.t;if(p.t>b.tmax)b.tmax=p.t;b.rows.push(p.r);});
+    buckets=[...mp.values()].sort((a,b)=>a.key-b.key).map(b=>{b.t=step==='month'?Date.UTC(Math.floor(b.key/12),b.key%12,15):step==='week'?b.key+3*DAY:b.key;b.val=b.sum/b.n;return b;});
+  }
+  const stb=qStats(buckets.map(b=>b.val)),[lo,hi]=qRange(stb);
+  const W=560,H=250,L=46,R=14,T=14,B=30,iw=W-L-R,ih=H-T-B;
+  if(t1===t0){t0-=15*DAY;t1+=15*DAY;}
+  const clampV=v=>Math.min(Math.max(v,lo),hi),X=t=>L+(Math.min(Math.max(t,t0),t1)-t0)/(t1-t0)*iw,Y=v=>T+(hi-clampV(v))/(hi-lo)*ih;
+  let svg=`<svg class="qsvg" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(m.name)} ao longo do tempo">`;
+  qTicks(lo,hi,4).forEach(v=>{const yy=Y(v);svg+=`<line class="qgridline" x1="${L}" y1="${yy.toFixed(1)}" x2="${W-R}" y2="${yy.toFixed(1)}"/><text class="qsmall" x="${L-7}" y="${(yy+3.5).toFixed(1)}" text-anchor="end">${fmt(v,m.digits)}</text>`;});
+  svg+=`<line class="qaxis" x1="${L}" y1="${T+ih}" x2="${W-R}" y2="${T+ih}"/>`;
+  const first=new Date(t0),months=[];let cur=Date.UTC(first.getUTCFullYear(),first.getUTCMonth()+(first.getUTCDate()>1?1:0),1);
+  while(cur<=t1){months.push(cur);const d=new Date(cur);cur=Date.UTC(d.getUTCFullYear(),d.getUTCMonth()+1,1);}
+  const stepX=Math.max(1,Math.ceil(months.length/7));
+  months.forEach((ms,i)=>{if(i%stepX)return;const xx=X(ms).toFixed(1);svg+=`<line class="qtick" x1="${xx}" y1="${T+ih}" x2="${xx}" y2="${T+ih+4}"/><text class="qsmall" x="${xx}" y="${H-10}" text-anchor="middle">${qMonthLabel(ms)}</text>`;});
+  if(!months.length)svg+=`<text class="qsmall" x="${X(t0).toFixed(1)}" y="${H-10}" text-anchor="middle">${qDateFull(t0)}</text>`;
+  const my=Y(all.mean).toFixed(1);
+  svg+=`<line class="qref" x1="${L}" y1="${my}" x2="${W-R}" y2="${my}"/>`;
+  buckets.forEach(b=>{b.x=X(b.t);b.y=Y(b.val);});
+  if(buckets.length>1)svg+=`<polyline class="qavg" style="stroke-width:${step==='result'?1.6:2.4}" points="${buckets.map(b=>`${b.x.toFixed(1)},${b.y.toFixed(1)}`).join(' ')}"/>`;
+  let out=0;
+  buckets.forEach(b=>{const outside=b.val<lo||b.val>hi;if(outside)out++;svg+=outside?`<circle class="qptout" cx="${b.x.toFixed(1)}" cy="${b.y.toFixed(1)}" r="${cfg.r+.8}"/>`:`<circle class="qdot${cfg.dense?' qdense':''}" cx="${b.x.toFixed(1)}" cy="${b.y.toFixed(1)}" r="${cfg.r}"/>`;});
+  svg+=`<text class="qlabel" x="${W-R-4}" y="${(Number(my)-6).toFixed(1)}" text-anchor="end">média geral ${fmt(all.mean,m.digits)}</text></svg>`;
+  const notes=[`${fmtCount(all.n)} resultados${step==='result'?'':` em ${fmtCount(buckets.length)} ${cfg.unit}`}. ${cfg.sub}.`];
+  if(out)notes.push(`${fmtCount(out)} ${out===1?'ponto fica':'pontos ficam'} fora da escala e ${out===1?'aparece':'aparecem'} como círculo vazio na borda (o valor real aparece ao passar o mouse).`);
+  if(semData)notes.push(`${fmtCount(semData)} resultados sem data não aparecem neste gráfico.`);
+  const tipOf=b=>{
+    if(b.n===1)return `<strong>${esc(m.name)}: ${fmt(b.val,m.digits)}</strong><br>${qDateFull(b.tmin)}<br>${qRowInfo(b.rows[0])}`;
+    const title=step==='month'?`Média de ${qMonthLabel(b.t)}`:step==='week'?`Média da semana de ${qDateFull(b.key)}`:`Média do dia ${qDateFull(b.t)}`;
+    return `<strong>${title}: ${fmt(b.val,m.digits)}</strong><br>${fmtCount(b.n)} resultados · de ${fmt(b.min,m.digits)} a ${fmt(b.max,m.digits)}<br>${qNames(b.rows,F.supplier,'Fornecedor não informado')}<br>${qNames(b.rows,F.storage,'Armazenamento não informado')}`;
+  };
+  return {html:svg+`<div class="chartfoot">${notes.join(' ')}</div>`,pts:buckets,tipOf};
+}
+function qRenderTrends(rs){[['qf',QUALITY_FLOUR],['qw',QUALITY_WHEAT]].forEach(([p,ms])=>qFill(p+'Trend',ms,()=>Q_STEPS[qualityStep].sub,m=>qTrend(rs,m)));}
+
+function qHist(rs,m){
+  const vals=qVals(rs,m.field);if(!vals.length)return qEmpty('Sem resultados para esta seleção.');
+  const st=qStats(vals);let lo=st.p1,hi=st.p99;if(!(hi>lo)){lo=st.min-.5;hi=st.max+.5;}
+  const bins=12,bw=(hi-lo)/bins,counts=new Array(bins).fill(0);let below=0,above=0;
+  vals.forEach(v=>{if(v<lo)below++;else if(v>hi)above++;else counts[Math.min(bins-1,Math.floor((v-lo)/bw))]++;});
+  const W=560,H=244,L=46,R=14,T=28,B=34,iw=W-L-R,ih=H-T-B,cmax=Math.max(...counts,1);
+  const X=v=>L+(v-lo)/(hi-lo)*iw,Yc=c=>T+(1-c/cmax)*ih;
+  let svg=`<svg class="qsvg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Distribuição de ${esc(m.name)}">`;
+  qTicks(0,cmax,4).forEach(c=>{const yy=Yc(c);svg+=`<line class="qgridline" x1="${L}" y1="${yy.toFixed(1)}" x2="${W-R}" y2="${yy.toFixed(1)}"/><text class="qsmall" x="${L-7}" y="${(yy+3.5).toFixed(1)}" text-anchor="end">${fmtCount(c)}</text>`;});
+  counts.forEach((c,i)=>{const a=lo+i*bw,b=a+bw,x0=X(a)+1,w=Math.max(1,iw/bins-2),y0=Yc(c);svg+=`<rect class="qbar" x="${x0.toFixed(1)}" y="${y0.toFixed(1)}" width="${w.toFixed(1)}" height="${Math.max(0,T+ih-y0).toFixed(1)}" rx="2"${qTipAttr(`<strong>${fmt(a,m.digits)} a ${fmt(b,m.digits)}</strong><br>${fmtCount(c)} resultados (${fmt(c/st.n*100,1)}%)`)}/>`;});
+  svg+=`<line class="qaxis" x1="${L}" y1="${T+ih}" x2="${W-R}" y2="${T+ih}"/>`;
+  for(let i=0;i<=bins;i+=2){const v=lo+i*bw;svg+=`<text class="qsmall" x="${X(v).toFixed(1)}" y="${H-12}" text-anchor="middle">${fmt(v,m.digits)}</text>`;}
+  if(st.mean>=lo&&st.mean<=hi){const mx=X(st.mean);svg+=`<line class="qref" x1="${mx.toFixed(1)}" y1="${T-14}" x2="${mx.toFixed(1)}" y2="${T+ih}" style="pointer-events:none"/><text class="qlabel" x="${(mx+(mx>W/2?-5:5)).toFixed(1)}" y="${T-8}" text-anchor="${mx>W/2?'end':'start'}">média ${fmt(st.mean,m.digits)}</text>`;}
+  svg+='</svg>';
+  const ext=below+above;
+  return {html:svg+`<div class="chartfoot">${fmtCount(st.n)} resultados. ${ext?`${fmtCount(ext)} valores extremos ficam fora da faixa mostrada (${fmtCount(below)} abaixo de ${fmt(lo,m.digits)}, ${fmtCount(above)} acima de ${fmt(hi,m.digits)}).`:'Todos os valores cabem na faixa mostrada.'}</div>`};
+}
+
+function qGroup(rs,m,idx,noun){
+  const map=new Map();
+  rs.forEach(r=>{const v=num(r[m.field]);if(v===null)return;const raw=clean(r[idx]);if(!raw)return;const k=normalized(raw);let g=map.get(k);if(!g){g={label:raw,n:0,sum:0};map.set(k,g);}g.n++;g.sum+=v;});
+  let groups=[...map.values()].filter(g=>g.n>=3).map(g=>({label:g.label,n:g.n,avg:g.sum/g.n}));
+  if(!groups.length)return qEmpty('Nenhum grupo com pelo menos 3 resultados nesta seleção.');
+  const total=groups.length;groups.sort((a,b)=>b.n-a.n);groups=groups.slice(0,10);groups.sort((a,b)=>b.avg-a.avg);
+  const overall=qStats(qVals(rs,m.field)).mean,max=Math.max(overall,...groups.map(g=>g.avg))*1.08;
+  const W=560,L=156,R=60,T=8,B=28,RH=26,H=T+B+groups.length*RH,iw=W-L-R,X=v=>L+v/max*iw,bottom=T+groups.length*RH;
+  let svg=`<svg class="qsvg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Média de ${esc(m.name)} por grupo">`;
+  groups.forEach((g,i)=>{const y=T+i*RH,bw=Math.max(2,g.avg/max*iw),tp=qTipAttr(`<strong>${esc(g.label)}</strong><br>${esc(m.name)}: média ${fmt(g.avg,m.digits)}<br>${fmtCount(g.n)} resultados`);svg+=`<rect class="qrowhit" x="0" y="${y}" width="${W}" height="${RH}"${tp}/><text class="qsmall" x="${L-8}" y="${(y+RH/2+3.5).toFixed(1)}" text-anchor="end" style="pointer-events:none">${esc(qCut(g.label,24))}</text><rect class="qbar" x="${L}" y="${y+4}" width="${bw.toFixed(1)}" height="${RH-8}" rx="3"${tp}/><text class="qvalue" x="${(L+bw+6).toFixed(1)}" y="${(y+RH/2+3.5).toFixed(1)}" style="pointer-events:none">${fmt(g.avg,m.digits)}</text><text class="qsmall" x="${W-4}" y="${(y+RH/2+3.5).toFixed(1)}" text-anchor="end" style="pointer-events:none">n=${fmtCount(g.n)}</text>`;});
+  svg+=`<line class="qaxis" x1="${L}" y1="${T}" x2="${L}" y2="${bottom}"/>`;
+  const ox=X(overall).toFixed(1);
+  svg+=`<line class="qref" x1="${ox}" y1="${T}" x2="${ox}" y2="${bottom}" style="pointer-events:none"/><text class="qlabel" x="${ox}" y="${H-8}" text-anchor="middle">média geral ${fmt(overall,m.digits)}</text></svg>`;
+  return {html:svg+`<div class="chartfoot">Os ${groups.length} ${noun} com mais resultados${total>groups.length?` (de ${total} com pelo menos 3)`:''}, ordenados pela média. n = resultados no grupo.</div>`};
+}
+
+function qScatter(rs){
+  const pts=[];rs.forEach(r=>{const x=num(r[F.pl]),y=num(r[F.w]);if(x!==null&&y!==null)pts.push({vx:x,vy:y,r});});
+  if(pts.length<2)return qEmpty('Sem amostras com W e P/L ao mesmo tempo nesta seleção.');
+  const sx=qStats(pts.map(p=>p.vx)),sy=qStats(pts.map(p=>p.vy)),[xl,xh]=qRange(sx),[yl,yh]=qRange(sy);
+  const W=1120,H=340,L=58,R=20,T=16,B=46,iw=W-L-R,ih=H-T-B;
+  const cl=(v,a,b)=>Math.min(Math.max(v,a),b),X=v=>L+(cl(v,xl,xh)-xl)/(xh-xl)*iw,Y=v=>T+(yh-cl(v,yl,yh))/(yh-yl)*ih;
+  let svg=`<svg class="qsvg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Força W em relação ao P/L">`;
+  qTicks(yl,yh,5).forEach(v=>{const yy=Y(v).toFixed(1);svg+=`<line class="qgridline" x1="${L}" y1="${yy}" x2="${W-R}" y2="${yy}"/><text class="qsmall" x="${L-8}" y="${(Number(yy)+3.5).toFixed(1)}" text-anchor="end">${fmt(v,0)}</text>`;});
+  qTicks(xl,xh,8).forEach(v=>{const xx=X(v).toFixed(1);svg+=`<line class="qgridline" x1="${xx}" y1="${T}" x2="${xx}" y2="${T+ih}"/><text class="qsmall" x="${xx}" y="${T+ih+16}" text-anchor="middle">${fmt(v,2)}</text>`;});
+  svg+=`<line class="qaxis" x1="${L}" y1="${T+ih}" x2="${W-R}" y2="${T+ih}"/><line class="qaxis" x1="${L}" y1="${T}" x2="${L}" y2="${T+ih}"/>`;
+  let out=0;
+  pts.forEach(p=>{p.x=X(p.vx);p.y=Y(p.vy);const outside=p.vx<xl||p.vx>xh||p.vy<yl||p.vy>yh;if(outside)out++;svg+=outside?`<circle class="qptout" cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="3.4"/>`:`<circle class="qpt" cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="2.6"/>`;});
+  const mx=X(sx.mean).toFixed(1),my=Y(sy.mean).toFixed(1);
+  svg+=`<line class="qref" x1="${mx}" y1="${T}" x2="${mx}" y2="${T+ih}" style="pointer-events:none"/><line class="qref" x1="${L}" y1="${my}" x2="${W-R}" y2="${my}" style="pointer-events:none"/>`;
+  svg+=`<text class="qlabel" x="${(Number(mx)+6).toFixed(1)}" y="${T+12}">P/L médio ${fmt(sx.mean,2)}</text><text class="qlabel" x="${W-R-4}" y="${(Number(my)-6).toFixed(1)}" text-anchor="end">W médio ${fmt(sy.mean,0)}</text>`;
+  svg+=`<text class="qlabel" x="${(L+iw/2).toFixed(1)}" y="${H-8}" text-anchor="middle">Relação P/L</text><text class="qlabel" transform="translate(14 ${(T+ih/2).toFixed(1)}) rotate(-90)" text-anchor="middle">Força (W)</text></svg>`;
+  return {html:svg+`<div class="chartfoot">${fmtCount(pts.length)} amostras com W e P/L.${out?` ${fmtCount(out)} valores extremos ficam fora da escala e aparecem como círculos vazios na borda (o valor real aparece ao passar o mouse).`:''}</div>`,pts,tipOf:p=>`<strong>W ${fmt(p.vy,0)} · P/L ${fmt(p.vx,2)}</strong><br>${(()=>{const t=qDateMs(p.r[F.date]);return t===null?'Sem data':qDateFull(t);})()}<br>${qRowInfo(p.r)}`};
+}
+
+function qFill(boxId,metrics,sub,build){
+  const box=$(boxId);
+  box.innerHTML=metrics.map(m=>`<article class="card"><div class="cardhead"><div><h3>${esc(m.name)}</h3></div><span class="tinybadge">${esc(m.badge)}</span></div><div class="qslot"></div></article>`).join('');
+  const slots=box.querySelectorAll('.qslot');
+  metrics.forEach((m,i)=>qMount(slots[i],build(m)));
+}
+function qKpis(boxId,rs,metrics){
+  $(boxId).innerHTML=metrics.map(m=>{const st=qStats(qVals(rs,m.field));const head=`<span class="kicon">${esc(m.icon)}</span><div class="klabel">${esc(m.name)}</div>`;if(!st)return `<div class="kpi">${head}<div class="kvalue">—</div><div class="kfoot">Sem resultados nesta seleção</div></div>`;return `<div class="kpi">${head}<div class="kvalue">${fmt(st.mean,m.digits)}</div><div class="kfoot">média · mediana ${fmt(st.median,m.digits)}</div><div class="kfoot">${fmtCount(st.n)} resultados · 90% entre ${fmt(st.p5,m.digits)} e ${fmt(st.p95,m.digits)}</div></div>`;}).join('');
+}
+function renderQuality(rs){
+  if(!$('qfKpis'))return;
+  const all=QUALITY_FLOUR.concat(QUALITY_WHEAT);
+  $('qualityCount').textContent=`${fmtCount(rs.filter(r=>all.some(m=>num(r[m.field])!==null)).length)} registros com resultados`;
+  const from=$('dateFrom').value,to=$('dateTo').value;
+  $('qualityPeriod').textContent=(from||to)?`${from?dateLabel(from):'Sem início'} — ${to?dateLabel(to):'Sem fim'}`:'Período completo';
+  const bySup=qualityGroupBy==='supplier',gIdx=bySup?F.supplier:F.storage,noun=bySup?'fornecedores':'locais de armazenamento',gsub=m=>bySup?'Média por fornecedor':'Média por local de armazenamento';
+  [['qf',QUALITY_FLOUR],['qw',QUALITY_WHEAT]].forEach(([p,metrics])=>{
+    qKpis(p+'Kpis',rs,metrics);
+    qFill(p+'Hist',metrics,()=>'Quantos resultados caem em cada faixa',m=>qHist(rs,m));
+    qFill(p+'Group',metrics,gsub,m=>qGroup(rs,m,gIdx,noun));
+  });
+  qRenderTrends(rs);
+  qMount($('qfScatter'),qScatter(rs));
+  document.querySelectorAll('[data-qstep]').forEach(b=>b.classList.toggle('active',b.dataset.qstep===qualityStep));
+  document.querySelectorAll('[data-qgroup]').forEach(b=>b.classList.toggle('active',b.dataset.qgroup===qualityGroupBy));
+}
+document.addEventListener('click',e=>{
+  const st=e.target.closest('[data-qstep]');if(st){qualityStep=st.dataset.qstep;document.querySelectorAll('[data-qstep]').forEach(b=>b.classList.toggle('active',b.dataset.qstep===qualityStep));qRenderTrends(getFiltered());return;}
+  const g=e.target.closest('[data-qgroup]');if(g){qualityGroupBy=g.dataset.qgroup;renderQuality(getFiltered());return;}
+  const j=e.target.closest('[data-qjump]');if(j){const t=document.getElementById(j.dataset.qjump);if(t)t.scrollIntoView({behavior:'smooth',block:'start'});return;}
+});
+
+
 initialize();
 </script>
 </body>
